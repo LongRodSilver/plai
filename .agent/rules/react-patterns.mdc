@@ -1,0 +1,11 @@
+---
+description: React component patterns and state management
+globs: *.{tsx,jsx}
+---
+# React Component Patterns
+
+1. **Composition**: Prioritize composition by passing JSX through `children` or render props to prevent massive monolithic components and deep prop drilling.
+2. **Custom Hooks**: Isolate complex state and side-effects into custom hooks. Keep components focused on presentation.
+3. **State Management**: Default to local `useState` or `useReducer`. Escalate to Context or global stores (Zustand, Jotai) only when cross-component state synchronization is strictly required.
+4. **Performance Optimization**: Evaluate rendering bottlenecks before applying `React.memo`, `useMemo`, or `useCallback`. Ensure context providers use memoized values to prevent unnecessary updates.
+5. **Unidirectional Flow**: Maintain strict one-way data flow. Child components should receive state via props and update it via callback functions.

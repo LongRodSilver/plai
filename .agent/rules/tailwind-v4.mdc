@@ -1,0 +1,11 @@
+---
+description: Tailwind v4 best practices and dark mode design tokens
+globs: *.{tsx,jsx,html,css}
+---
+# Tailwind v4 Rules
+
+1. **Design Tokens & CSS Variables**: Heavily utilize Tailwind v4's CSS variables system for theming. Extract base colors, spacing, and typography into variables to swap themes smoothly.
+2. **Dark Mode Integration**: Implement Dark Mode directly through CSS variable overrides within a media query or a root `dark` class, rather than overly sprinkling `dark:` utilities everywhere.
+3. **Utility-First**: Avoid premature abstraction into `@apply` classes. Use utility classes in the component to keep styles explicitly tied to markup.
+4. **Ordering**: Group your utility classes logically (Layout > Spacing > Typography > Colors > Effects) or use a consistent automated sorter.
+5. **v4 Features**: Leverage v4 native CSS `@theme` configuration over the traditional `tailwind.config.js` when appropriate.

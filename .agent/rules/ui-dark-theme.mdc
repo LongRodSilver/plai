@@ -1,0 +1,11 @@
+---
+description: Dark UI design system and minimal aesthetic principles
+globs: *.{tsx,jsx,css}
+---
+# Dark UI Design System
+
+1. **Surface Layering**: Instead of relying heavily on drop shadows (which disappear on dark backgrounds), use lighter shades of dark gray (elevation colors) to distinguish foreground cards from the background.
+2. **Contrast Levels**: Avoid pure `#FFFFFF` text on pure `#000000` backgrounds. Use off-whites (e.g., `#E4E4E7`) for text and off-blacks (e.g., `#09090B`) for backgrounds to reduce eye strain.
+3. **Typography Adjustments**: Light text against dark surfaces often looks thicker. Increase letter-spacing slightly and consider bolder font weights if using very thin fonts to maintain legibility.
+4. **Minimal Aesthetic**: Embrace generous negative space and focus user attention. Use highly saturated colors sparingly, strictly as accents for actionable items or critical states.
+5. **Gradients and Borders**: Use subtle borders (`border-white/10`) or faint glassmorphism effects to separate UI boundaries rather than harsh lines.

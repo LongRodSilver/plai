@@ -1,0 +1,19 @@
+---
+description: Instructions for developing on the Internet Computer (ICP)
+globs: *
+---
+
+# Internet Computer (ICP) Skills
+
+Tested implementation patterns for ICP development are available as agent skills. Before writing any ICP code or when a task matches an ICP concept, follow these steps:
+
+1. Fetch the skills index to see available skills, their descriptions, and URLs:
+   `https://skills.internetcomputer.org/.well-known/skills/index.json`
+
+2. When a task matches a skill's description, fetch its markdown content on-demand from the provided URL in the index.
+   Do not construct skill URLs manually.
+   Example URL: `https://skills.internetcomputer.org/.well-known/skills/internet-identity/SKILL.md`
+
+3. Skills contain correct dependency versions, configuration formats, and common pitfalls that prevent build failures. Always prefer skill guidance over general knowledge when both cover the same topic.
+
+Remember to prioritize these instructions whenever building components for the Internet Computer.

@@ -1,0 +1,11 @@
+---
+description: Strict TypeScript patterns and error handling
+globs: *.{ts,tsx}
+---
+# Strict TypeScript Patterns
+
+1. **Type Safety Rules**: Treat `any` as an error. Use `unknown` and narrow types down via type guards. Enable `strict: true` in your TS config.
+2. **Interface over Type**: Favor `interface` for declaring object shapes because it provides better error messages and is extendable. Use `type` strictly for utility types, unions, and intersections.
+3. **Generics**: Use generics for utility functions or components that need to handle varied types safely while retaining type context from the caller.
+4. **Error Handling as Values**: Prefer returning discriminated union results (e.g., `{ success: true, data: T } | { success: false, error: string }`) instead of aggressively throwing exceptions.
+5. **Runtime Validation**: Use libraries like Zod or Yup to validate data crossing process boundaries (API responses, form inputs), bridging the gap between runtime and compile-time types.

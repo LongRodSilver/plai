@@ -1,0 +1,36 @@
+{
+  "canisters": {
+    "plai_frontend": {
+      "dependencies": [
+        "betting"
+      ],
+      "frontend": {
+        "entrypoint": "frontend/dist/index.html"
+      },
+      "source": [
+        "frontend/dist"
+      ],
+      "type": "assets"
+    },
+    "betting": {
+      "main": "backend/canisters/betting/main.mo",
+      "type": "motoko"
+    },
+    "auth": {
+      "main": "backend/canisters/auth/auth.mo",
+      "type": "motoko"
+    },
+    "ledger": {
+      "main": "backend/canisters/ledger/ckusdc.mo",
+      "type": "motoko"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "dfx": "0.20.1",
+  "version": 1
+}

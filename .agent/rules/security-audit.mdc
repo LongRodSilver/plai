@@ -1,0 +1,11 @@
+---
+description: Web security best practices and API design
+globs: *.{ts,tsx,js,jsx}
+---
+# Web Security Best Practices
+
+1. **Input Validation**: Treat all inputs as untrusted. Strictly validate payloads on the server-side before execution or storage to prevent SQL Injection, NoSQL Injection, XSS, and path traversal.
+2. **Authentication Flows**: Use HttpOnly, Secure cookies for sessions or tokens. If storing Access Tokens locally, handle token expiration gracefully and lock down refresh endpoints.
+3. **CSRF Protection**: Rely on `SameSite=Lax` or `Strict` cookie attributes, combined with Anti-CSRF tokens for state-mutating requests (POST, PUT, DELETE).
+4. **Secure API Design**: Apply rate-limiting. Strictly verify User and Resource Authorization (RBAC or ABAC) on every request—authentication alone is not enough.
+5. **Output Encoding**: Rely on UI library safeguards (like React's automatic escaping) and aggressively vet the use of `dangerouslySetInnerHTML`.
