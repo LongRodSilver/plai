@@ -1,0 +1,10 @@
+type Result = 
+ variant {
+   err: text;
+   ok: text;
+ };
+service : {
+  createBet: (text, text, nat64) -> (Result);
+  getCommissionRate: () -> (float64);
+  settleMatch: (text, text) -> (Result);
+}

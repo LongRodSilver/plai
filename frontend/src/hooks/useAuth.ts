@@ -1,11 +1,14 @@
 import { AuthClient } from "@dfinity/auth-client";
+import { HttpAgent } from "@dfinity/agent";
 import type { Identity } from "@dfinity/agent";
 import { useEffect, useState, useCallback } from "react";
+import { createAgent, createAuthActor } from "../services/icp";
 
 interface AuthState {
   isAuthenticated: boolean;
   principal: string | null;
   identity: Identity | null;
+  agent: HttpAgent | null;
   isLoading: boolean;
   login: () => Promise<void>;
   logout: () => Promise<void>;
@@ -16,6 +19,7 @@ export function useAuth(): AuthState {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [principal, setPrincipal] = useState<string | null>(null);
   const [identity, setIdentity] = useState<Identity | null>(null);
+  const [agent, setAgent] = useState<HttpAgent | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Initialize AuthClient on mount
@@ -26,12 +30,14 @@ export function useAuth(): AuthState {
         const authenticated = await client.isAuthenticated();
         if (authenticated) {
           const id = client.getIdentity();
-          const p = id.getPrincipal().toText();
+          const p = id.getPrincipal();
           // Guard against anonymous principal (means auth silently failed)
-          if (p !== "2vxsx-fae") {
+          if (!p.isAnonymous()) {
+            const authedAgent = createAgent(id);
             setIsAuthenticated(true);
             setIdentity(id);
-            setPrincipal(p);
+            setPrincipal(p.toText());
+            setAgent(authedAgent);
           }
         }
         setIsLoading(false);
@@ -59,9 +65,20 @@ export function useAuth(): AuthState {
           const p = id.getPrincipal();
 
           if (!p.isAnonymous()) {
+            const authedAgent = createAgent(id);
             setIsAuthenticated(true);
             setIdentity(id);
             setPrincipal(p.toText());
+            setAgent(authedAgent);
+
+            // Verify canister connectivity via auth.ping()
+            // TODO: replace with register/getProfile when auth canister exposes them
+            const authActor = createAuthActor(authedAgent);
+            authActor.ping().then((pong) => {
+              console.info("[Auth canister] ping →", pong);
+            }).catch((err) => {
+              console.warn("[Auth canister] ping failed (is replica running?):", err);
+            });
           }
 
           setIsLoading(false);
@@ -82,7 +99,8 @@ export function useAuth(): AuthState {
     setIsAuthenticated(false);
     setIdentity(null);
     setPrincipal(null);
+    setAgent(null);
   }, [authClient]);
 
-  return { isAuthenticated, principal, identity, isLoading, login, logout };
+  return { isAuthenticated, principal, identity, agent, isLoading, login, logout };
 }

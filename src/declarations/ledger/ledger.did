@@ -1,0 +1,6 @@
+service : {
+  icrc1_balance_of: (record {
+                       owner: principal;
+                       subaccount: opt blob;
+                     }) -> (nat);
+}
